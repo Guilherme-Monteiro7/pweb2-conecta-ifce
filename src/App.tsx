@@ -1,12 +1,11 @@
-import { Button } from "./components/ui/button"
+import Navbar from "./components/shared/navbar"
 
 function App() {
-
   return (
     <>
-      <div className='min-h-svh'>
-       <Button>Entrar</Button>
-      </div>
+      <Navbar />
+      <main>Conteúdo Principal</main>
+      <footer>Rodapé</footer>
     </>
   )
 }
