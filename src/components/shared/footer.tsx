@@ -62,7 +62,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href="/about"
+                  href="https://portal.ifce.edu.br/institucional/sobre-o-ifce/"
                   className="text-muted-foreground text-sm font-medium hover:text-primary"
                 >
                   Sobre
@@ -70,7 +70,7 @@ function Footer() {
               </li>
               <li>
                 <a
-                  href="/contact"
+                  href="https://portal.ifce.edu.br/institucional/contatos-na-reitoria-e-nos-campi/"
                   className="text-muted-foreground text-sm font-medium hover:text-primary"
                 >
                   Contato
