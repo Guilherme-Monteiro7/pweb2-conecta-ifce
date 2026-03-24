@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { ArrowRight} from 'lucide-react'
+import { Button } from '@/shared/components/ui/button'
+import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router'
 function CtaSection() {
   return (
@@ -24,7 +24,9 @@ function CtaSection() {
           </Link>
         </Button>
         <Button variant="ghost" size="lg" asChild>
-          <Link to="/login" className='w-40 h-12'>Já tem Conta?</Link>
+          <Link to="/login" className="w-40 h-12">
+            Já tem Conta?
+          </Link>
         </Button>
       </div>
     </section>

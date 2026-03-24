@@ -1,14 +1,13 @@
-import Brand from "@/components/shared/brand"
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router"
-
+import Brand from '@/shared/brand'
+import { Button } from '@/shared/components/ui/button'
+import { Link } from 'react-router'
 
 function Navbar() {
   return (
     <header className="sticky top-0 border-b border-border z-50 bg-card/80 backdrop-blur-md ">
       <nav className="container-main flex items-center justify-between py-3">
         <Link to="/">
-          <Brand/>
+          <Brand />
         </Link>
 
         <div className="flex gap-4 lg:gap-8">

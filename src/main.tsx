@@ -4,12 +4,12 @@ import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter } from 'react-router'
 import LoginPage from '@/pages/LoginPage.tsx'
-import HomePage from '@/pages/HomePage.tsx'
+import HomePage from '@/pages/homepage/HomePage.tsx'
 import RegisterPage from '@/pages/RegisterPage.tsx'
 import { RouterProvider } from 'react-router'
 
-const router =createBrowserRouter([
-  { 
+const router = createBrowserRouter([
+  {
     path: '/',
     Component: App,
     children: [
@@ -24,11 +24,10 @@ const router =createBrowserRouter([
       {
         path: 'register',
         Component: RegisterPage,
-      }
-    ]
-  }
-]
-)
+      },
+    ],
+  },
+])
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
