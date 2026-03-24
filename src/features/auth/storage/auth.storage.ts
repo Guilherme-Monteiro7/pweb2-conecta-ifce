@@ -1,11 +1,11 @@
 const KEY_TOKEN ='access_token'
 
 function setAcessToken(token: string) {
-  localStorage.setItem('KEY_TOKEN', token)
+  localStorage.setItem(KEY_TOKEN, token)
 }
 
 function getAcessToken() {
-  localStorage.getItem('KEY_TOKEN')
+  return localStorage.getItem(KEY_TOKEN) 
 }
 
 function clearAccessToken() {
