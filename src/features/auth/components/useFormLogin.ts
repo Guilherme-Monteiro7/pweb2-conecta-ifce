@@ -1,5 +1,6 @@
 import { LoginSchema, type LoginFormData } from '@/features/auth/schemas/login.schema'
 import { setAcessToken } from '@/features/auth/storage/auth.storage'
+import { ApiError } from '@/infra/http/api-error'
 import { http } from '@/infra/http/http-client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
@@ -21,17 +22,19 @@ export function useFormLogin() {
   })
 
   const onSubmit = async (data: LoginFormData) => {
-    setLoginError(null) // Limpa erros anteriores antes de tentar de novo
+    setLoginError(null)
 
     try {
-      // Ajuste a rota 'auth/login' conforme a sua API
       const responseData = await http.post<{ token: string; user: any }>('auth/login', data)
 
       setAcessToken(responseData.token)
       navigate('/feed')
     } catch (error) {
+      if (error instanceof ApiError) {
+        setLoginError(error.message)
+        return
+      }
       console.error(error)
-      setLoginError('E-mail ou senha inválidos. Tente novamente.')
     }
   }
 
