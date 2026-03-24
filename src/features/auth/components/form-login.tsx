@@ -2,7 +2,7 @@ import { Button } from '@/shared/components/ui/button'
 import { Input } from '@/shared/components/ui/input'
 import { Label } from '@/shared/components/ui/label'
 import { EyeIcon, EyeOffIcon, Loader2Icon } from 'lucide-react'
-import { useFormLogin } from './useFormLogin' // Ajuste o caminho se necessário
+import { useFormLogin } from './useFormLogin'
 
 export function FormLogin() {
   const { state, onSubmit, useForm } = useFormLogin()
@@ -10,7 +10,6 @@ export function FormLogin() {
   return (
     <form className="flex flex-col gap-4" onSubmit={useForm.handleSubmit(onSubmit)}>
 
-      {/* Se a API retornar erro de login, mostra aqui em cima */}
       {state.loginError && (
         <div className="bg-destructive/15 text-destructive text-sm p-3 rounded-md text-center">
           {state.loginError}
@@ -73,6 +72,11 @@ export function FormLogin() {
           </p>
         )}
       </div>
+
+      {/* Texto de dica adicionado para refletir o seu Schema! */}
+      <p className="text-xs text-muted-foreground -mt-3 mb-2">
+        Minimo de 8 caracteres com letras e números
+      </p>
 
       {/* --- BOTÃO DE SUBMIT --- */}
       <Button

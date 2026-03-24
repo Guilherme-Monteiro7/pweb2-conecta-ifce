@@ -1,4 +1,4 @@
-import { loginSchema, type LoginFormData } from '@/features/auth/schemas/login.schema'
+import { LoginSchema, type LoginFormData } from '@/features/auth/schemas/login.schema'
 import { setAcessToken } from '@/features/auth/storage/auth.storage'
 import { http } from '@/infra/http/http-client'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,7 +16,7 @@ export function useFormLogin() {
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(LoginSchema),
     mode: 'onBlur',
   })
 

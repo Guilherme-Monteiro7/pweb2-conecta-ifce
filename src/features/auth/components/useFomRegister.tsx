@@ -24,7 +24,7 @@ export function useFormRegister() {
     async function fetchCampuses() {
       try {
         const campuses =
-          await http.get<Array<{ id: string; name: string }>>('/campuses')
+          await http.get<Array<{ id: string; name: string }>>('campuses')
         setCampuses(campuses)
       } catch (error) {
         console.error(error)
