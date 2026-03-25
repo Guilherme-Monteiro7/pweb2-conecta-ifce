@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/shared/components/ui/avatar"
 
 
-function AvatarUser() {
+function UserAvatar() {
   return (
   <Avatar>
   <AvatarImage src="https://github.com/shadcn.png" />
@@ -10,4 +10,4 @@ function AvatarUser() {
   )
 }
 
-export default AvatarUser
+export default UserAvatar
