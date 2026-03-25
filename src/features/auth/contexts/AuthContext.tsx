@@ -8,7 +8,7 @@ import { createContext, useContext, useState, type ReactNode } from 'react'
 
 // context type
 type AuthContextType = {
-  isAthenticated: boolean
+  isAuthenticated: boolean // <-- Corrigido aqui (com 'u')
   authUser: AuthUser | null
   setAuthUser: (user: AuthUser) => void
   clearAuthUser: () => void
@@ -36,7 +36,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext
       value={{
-        isAthenticated: authUser !== null,
+        isAuthenticated: authUser !== null, // <-- Corrigido aqui (com 'u')
         authUser,
         setAuthUser: setUser,
         clearAuthUser: clearUser,
