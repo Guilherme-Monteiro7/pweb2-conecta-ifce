@@ -3,21 +3,29 @@ export type UserRequestDTO = {
   lastName: string
   handle: string
   email: string
-  role: 'student' | 'professor' | 'technician'
+  role: 'STUDENT' | 'PROFESSOR' | 'TECHNICIAN'
   campus: string
   password: string
   course?: string | undefined
 }
 
-export type UserResponseDTO = {
-  token: string
-  user: UserRequestDTO & {
+export type AuthUser = {
+  id: string
+  firstName: string
+  lastName: string
+  name: string
+  avatarUrl?: string
+  handle: string
+  email: string
+  role: 'STUDENT' | 'PROFESSOR' | 'TECHNICIAN'
+  campus: {
     id: string
     name: string
-    avatarUrl?: string
-    campus: {
-      id: string
-      name: string
-    }
   }
+  course?: string | undefined
+}
+
+export type UserResponseDTO = {
+  token: string
+  user: AuthUser
 }

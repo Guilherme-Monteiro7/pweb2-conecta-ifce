@@ -1,5 +1,8 @@
-import { LoginSchema, type LoginFormData } from '@/features/auth/schemas/login.schema'
-import { setAcessToken } from '@/features/auth/storage/auth.storage'
+import {
+  LoginSchema,
+  type LoginFormData,
+} from '@/features/auth/schemas/login.schema'
+import { setAcessToken } from '@/features/auth/storages/token.storage'
 import { ApiError } from '@/infra/http/api-error'
 import { http } from '@/infra/http/http-client'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -25,7 +28,10 @@ export function useFormLogin() {
     setLoginError(null)
 
     try {
-      const responseData = await http.post<{ token: string; user: any }>('auth/login', data)
+      const responseData = await http.post<{ token: string; user: any }>(
+        'auth/login',
+        data,
+      )
 
       setAcessToken(responseData.token)
       navigate('/feed')
@@ -34,7 +40,6 @@ export function useFormLogin() {
         setLoginError(error.message)
         return
       }
-   
     }
   }
 
