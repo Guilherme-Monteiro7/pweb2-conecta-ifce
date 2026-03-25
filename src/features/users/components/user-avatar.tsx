@@ -1,3 +1,4 @@
+import { useAvatar } from '@/features/users/components/useAvatar'
 import {
   Avatar,
   AvatarFallback,
@@ -5,17 +6,24 @@ import {
 } from '@/shared/components/ui/avatar'
 
 function UserAvatar({
-  imageUrl,
-  initials,
-  size,
+  avatarUrl,
+  firstName,
+  lastName,
+  size
 }: {
-  imageUrl: string | undefined
-  initials: string
+  avatarUrl: string | undefined
+  firstName: string | undefined
+  lastName: string | undefined
   size: 'default'| 'sm' | 'lg' | undefined
 }) {
+
+ const {getInitials} = useAvatar(firstName , lastName)
+
+ const initials = getInitials()
+
   return (
     <Avatar size={size}>
-      <AvatarImage src={imageUrl} />
+      <AvatarImage src={avatarUrl} />
       <AvatarFallback className="bg-primary/20 text-primary border border-primary/50 font-semibold">
         {initials}
       </AvatarFallback>
