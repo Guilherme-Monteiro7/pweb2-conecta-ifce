@@ -1,5 +1,6 @@
 import { registerSchema, type RegisterFormData } from '@/features/auth/schemas/register.schema'
-import { registerUser, type UserRequestDTO } from '@/features/auth/services/register.service'
+import { registerUser } from '@/features/auth/services/register.service'
+import type { UserRequestDTO } from '@/features/auth/types/dto/auth-dto'
 import { ApiError } from '@/infra/http/api-error'
 import { http } from '@/infra/http/http-client'
 import { zodResolver } from '@hookform/resolvers/zod'
