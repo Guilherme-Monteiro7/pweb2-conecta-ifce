@@ -1,8 +1,6 @@
-import {
-  registerSchema,
-  type RegisterFormData,
-} from '@/features/auth/schemas/register.schema'
-import { setAcessToken } from '@/features/auth/storage/auth.storage'
+import { registerSchema, type RegisterFormData } from '@/features/auth/schemas/register.schema'
+import { registerUser, type UserRequestDTO } from '@/features/auth/services/register.service'
+import { ApiError } from '@/infra/http/api-error'
 import { http } from '@/infra/http/http-client'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
@@ -11,20 +9,15 @@ import { useNavigate } from 'react-router'
 
 export function useFormRegister() {
   const [showPass, setShowPass] = useState<boolean>(false)
-  const [campuses, setCampuses] = useState<
-    Array<{
-      id: string
-      name: string
-    }>
-  >([])
+  const [registerError, setRegisterError] = useState<string | null>(null)
+  const [campuses, setCampuses] = useState<Array<{ id: string; name: string }>>([])
 
   const navigate = useNavigate()
 
   useEffect(() => {
     async function fetchCampuses() {
       try {
-        const campuses =
-          await http.get<Array<{ id: string; name: string }>>('campuses')
+        const campuses = await http.get<Array<{ id: string; name: string }>>('campuses')
         setCampuses(campuses)
       } catch (error) {
         console.error(error)
@@ -38,7 +31,7 @@ export function useFormRegister() {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitted, isSubmitting, isValid },
+    formState: { errors, isSubmitting, isValid },
     watch,
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
@@ -46,19 +39,21 @@ export function useFormRegister() {
   })
 
   const onSubmit = async (data: RegisterFormData) => {
+    setRegisterError(null)
     const { course, ...rest } = data
     const payload = data.role === 'student' ? data : rest
 
     try {
-      const responseData = await http.post<{token: string, user: any}>('auth/register', payload )
-      setAcessToken(responseData.token)
+      await registerUser(payload as UserRequestDTO)
       navigate('/feed')
-    } catch (error){
+    } catch (error) {
+      if (error instanceof ApiError) {
+        setRegisterError(error.message)
+        return
+      }
       console.error(error)
-
+      setRegisterError('Erro ao realizar o cadastro. Tente novamente.')
     }
-
-
   }
 
   return {
@@ -66,6 +61,7 @@ export function useFormRegister() {
       showPass,
       setShowPass,
       campuses,
+      registerError,
     },
     onSubmit,
     useForm: {

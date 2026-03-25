@@ -205,6 +205,11 @@ function FormRegister() {
           'Criar Conta'
         )}
       </Button>
+      {state.registerError && (
+            <p className="absolute bottom-0 text-[11px] leading-tight text-destructive h-4">
+              {state.registerError}
+            </p>
+          )}
     </form>
   )
 }

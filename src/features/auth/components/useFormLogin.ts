@@ -34,7 +34,7 @@ export function useFormLogin() {
         setLoginError(error.message)
         return
       }
-      console.error(error)
+   
     }
   }
 
