@@ -9,7 +9,7 @@ export const registerSchema = z.object({
     .min(3, 'o nome de usuário deve ter no mínimo 3 caracteres').regex(/^[a-zA-Z0-9_]+$/ ,'o nome de usuário só pode conter letras, números e underscores'),
   email: z
     .email('E-mail inválido'),
-  role: z.enum(['student', 'professor', 'technician']),
+  role: z.enum(['STUDENT', 'PROFESSOR', 'TECHNICIAN']),
   campus: z.string().nonempty(),
   course: z
     .string()

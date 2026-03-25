@@ -1,4 +1,8 @@
-import { registerSchema, type RegisterFormData } from '@/features/auth/schemas/register.schema'
+import { useAuth } from '@/features/auth/contexts/AuthContext'
+import {
+  registerSchema,
+  type RegisterFormData,
+} from '@/features/auth/schemas/register.schema'
 import { registerUser } from '@/features/auth/services/register.service'
 import type { UserRequestDTO } from '@/features/auth/types/dto/auth-dto'
 import { ApiError } from '@/infra/http/api-error'
@@ -11,14 +15,18 @@ import { useNavigate } from 'react-router'
 export function useFormRegister() {
   const [showPass, setShowPass] = useState<boolean>(false)
   const [registerError, setRegisterError] = useState<string | null>(null)
-  const [campuses, setCampuses] = useState<Array<{ id: string; name: string }>>([])
+  const [campuses, setCampuses] = useState<Array<{ id: string; name: string }>>(
+    [],
+  )
 
   const navigate = useNavigate()
+  const { setAuthUser} = useAuth()
 
   useEffect(() => {
     async function fetchCampuses() {
       try {
-        const campuses = await http.get<Array<{ id: string; name: string }>>('campuses')
+        const campuses =
+          await http.get<Array<{ id: string; name: string }>>('campuses')
         setCampuses(campuses)
       } catch (error) {
         console.error(error)
@@ -42,10 +50,16 @@ export function useFormRegister() {
   const onSubmit = async (data: RegisterFormData) => {
     setRegisterError(null)
     const { course, ...rest } = data
-    const payload = data.role === 'student' ? data : rest
+    const payload = data.role === 'STUDENT' ? data : rest
 
     try {
-      await registerUser(payload as UserRequestDTO)
+      // 1. Capturamos a resposta do registro na variável responseData
+      const responseData = await registerUser(payload as UserRequestDTO)
+
+      // 2. Salvamos o novo usuário no nosso Contexto de Autenticação
+      setAuthUser(responseData.user)
+
+      // 3. Mandamos ele direto pro feed!
       navigate('/feed')
     } catch (error) {
       if (error instanceof ApiError) {

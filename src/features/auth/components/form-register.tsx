@@ -98,9 +98,9 @@ function FormRegister() {
                 <SelectValue placeholder="Selecione seu vinculo com o IFCE" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="student">Estudante</SelectItem>
-                <SelectItem value="professor">Docente</SelectItem>
-                <SelectItem value="technician">Técnico(a)</SelectItem>
+                <SelectItem value="STUDENT">Estudante</SelectItem>
+                <SelectItem value="PROFESSOR">Docente</SelectItem>
+                <SelectItem value="TECHNICIAN">Técnico(a)</SelectItem>
               </SelectContent>
             </Select>
           )}
@@ -138,7 +138,7 @@ function FormRegister() {
         )}
       </div>
 
-      {useForm.watch('role') === 'student' && (
+      {useForm.watch('role') === 'STUDENT' && (
         <div className=" flex flex-col gap-2 relative pb-5">
           <Label htmlFor="course" className="text-foreground">
             Curso
