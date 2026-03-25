@@ -1,7 +1,14 @@
+import { useAuth } from "@/features/auth/contexts/AuthContext"
 import Navbar from "@/shared/navbar"
-import { Outlet } from "react-router"
+import { Navigate, Outlet } from "react-router"
 
 function AppLayout(){
+
+  const {isAthenticated} = useAuth()
+
+  if(!isAthenticated){
+    return <Navigate to ='/login' replace />
+  }
   return (
      <>
       <div className="flex flex-col min-h-svh">
