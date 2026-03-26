@@ -4,7 +4,7 @@ import {
   type RegisterFormData,
 } from '@/features/auth/schemas/register.schema'
 import { registerUser } from '@/features/auth/services/register.service'
-import type { UserRequestDTO } from '@/features/auth/types/dto/auth-dto'
+import type { UserRequestDTO } from '@/features/auth/types/dto/AuthDTO'
 import { ApiError } from '@/infra/http/api-error'
 import { http } from '@/infra/http/http-client'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -20,7 +20,7 @@ export function useFormRegister() {
   )
 
   const navigate = useNavigate()
-  const { setAuthUser} = useAuth()
+  const { setAuthUser } = useAuth()
 
   useEffect(() => {
     async function fetchCampuses() {
